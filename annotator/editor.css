@@ -1,0 +1,747 @@
+/*
+ * NoteFreeze — annotator/editor.css
+ * Styles for the Word-style rich-text editor panel (SPEC §10).
+ * Theme-aware via the --sfp-* variables from shared/themes.css; the backdrop
+ * carries data-theme so the [data-theme] variable blocks cascade into it.
+ */
+
+/* ------------------------------------------------------------------ */
+/* Backdrop + panel shell                                              */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 2147483000;
+}
+
+.sfp-ed-panel {
+  position: fixed;
+  inset: 10%; /* SPEC §10.1 — 10% margin on all sides */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--sfp-bg, #ffffff);
+  color: var(--sfp-text, #1f2328);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 12px;
+  box-shadow: 0 24px 80px var(--sfp-shadow, rgba(0, 0, 0, .45));
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sfp-ed-panel *,
+.sfp-ed-panel *::before,
+.sfp-ed-panel *::after {
+  box-sizing: border-box;
+}
+
+.sfp-ed-panel [hidden] {
+  display: none !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* Title bar                                                           */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-titlebar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  background: var(--sfp-accent, #0969da);
+  color: var(--sfp-accent-text, #ffffff);
+  user-select: none;
+}
+
+.sfp-ed-titletext {
+  flex: 1 1 auto;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sfp-ed-x {
+  flex: 0 0 auto;
+  background: rgba(0, 0, 0, .18);
+  border: none;
+  color: inherit;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sfp-ed-x:hover {
+  background: rgba(0, 0, 0, .34);
+}
+
+/* ------------------------------------------------------------------ */
+/* Buttons (shared)                                                    */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--sfp-text, #1f2328);
+  font: inherit;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 4px 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.sfp-ed-btn:hover {
+  background: var(--sfp-surface2, #eaeef2);
+  border-color: var(--sfp-border, #d0d7de);
+}
+
+.sfp-ed-btn:active {
+  filter: brightness(.94);
+}
+
+.sfp-ed-btn.sfp-ed-on {
+  background: var(--sfp-surface2, #eaeef2);
+  border-color: var(--sfp-accent, #0969da);
+  box-shadow: inset 0 0 0 1px var(--sfp-accent, #0969da);
+}
+
+.sfp-ed-btn svg {
+  display: block;
+  pointer-events: none;
+}
+
+/* Quick-access row */
+
+.sfp-ed-quick {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--sfp-surface, #f6f8fa);
+  border-bottom: 1px solid var(--sfp-border, #d0d7de);
+}
+
+.sfp-ed-savebtn {
+  background: var(--sfp-accent, #0969da);
+  border-color: var(--sfp-accent, #0969da);
+  color: var(--sfp-accent-text, #ffffff);
+  font-weight: 600;
+  padding: 5px 14px;
+}
+
+.sfp-ed-savebtn:hover {
+  background: var(--sfp-accent, #0969da);
+  border-color: var(--sfp-accent, #0969da);
+  filter: brightness(1.1);
+}
+
+.sfp-ed-delbtn {
+  margin-left: auto;
+  color: var(--sfp-danger, #d1242f);
+  border-color: transparent;
+}
+
+.sfp-ed-delbtn:hover {
+  background: rgba(220, 50, 60, .14); /* Chrome 110-safe (no color-mix) */
+  border-color: var(--sfp-danger, #d1242f);
+}
+
+/* ------------------------------------------------------------------ */
+/* Tab strip                                                           */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-tabstrip {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 2px;
+  padding: 4px 12px 0;
+  background: var(--sfp-surface, #f6f8fa);
+  user-select: none;
+}
+
+.sfp-ed-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  color: var(--sfp-text-muted, #57606a);
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 16px;
+  cursor: pointer;
+}
+
+.sfp-ed-tab:hover {
+  color: var(--sfp-text, #1f2328);
+}
+
+.sfp-ed-tab.sfp-ed-on {
+  background: var(--sfp-bg, #ffffff);
+  border-color: var(--sfp-border, #d0d7de);
+  color: var(--sfp-accent, #0969da);
+  font-weight: 600;
+  position: relative;
+  top: 1px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ribbon: panes, groups, captions (Word-style)                        */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-ribbon {
+  flex: 0 0 auto;
+  background: var(--sfp-bg, #ffffff);
+  border-bottom: 1px solid var(--sfp-border, #d0d7de);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.sfp-ed-pane {
+  display: flex;
+  align-items: stretch;
+  padding: 6px 10px 2px;
+  min-width: max-content;
+}
+
+.sfp-ed-group {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  border-right: 1px solid var(--sfp-border, #d0d7de);
+}
+
+.sfp-ed-group:last-child {
+  border-right: none;
+}
+
+.sfp-ed-gbody {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sfp-ed-gcap {
+  flex: 0 0 auto;
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--sfp-text-muted, #57606a);
+  padding: 3px 0 2px;
+  user-select: none;
+}
+
+.sfp-ed-rows {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 3px;
+}
+
+.sfp-ed-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.sfp-ed-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.sfp-ed-sm {
+  justify-content: flex-start;
+  min-height: 24px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+.sfp-ed-big {
+  flex-direction: column;
+  gap: 3px;
+  min-width: 56px;
+  min-height: 58px;
+  padding: 6px 10px;
+  font-size: 11.5px;
+}
+
+.sfp-ed-bigico {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+/* Selects (font family / size) */
+
+.sfp-ed-select {
+  background: var(--sfp-bg, #ffffff);
+  color: var(--sfp-text, #1f2328);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 5px;
+  font: inherit;
+  font-size: 12.5px;
+  height: 26px;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.sfp-ed-select:focus {
+  outline: 2px solid var(--sfp-accent, #0969da);
+  outline-offset: -1px;
+}
+
+.sfp-ed-fontsel {
+  width: 148px;
+}
+
+.sfp-ed-sizesel {
+  width: 58px;
+}
+
+/* Color split buttons: letter over a color bar */
+
+.sfp-ed-colorbtn {
+  flex-direction: column;
+  gap: 2px;
+  padding: 3px 7px;
+}
+
+.sfp-ed-a {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.sfp-ed-bar {
+  display: block;
+  width: 16px;
+  height: 4px;
+  border-radius: 1px;
+  background: #e03131;
+  outline: 1px solid rgba(0, 0, 0, .15);
+}
+
+.sfp-ed-bar-hl {
+  background: #ffff00;
+}
+
+/* Style-gallery buttons */
+
+.sfp-ed-styles {
+  display: flex;
+  gap: 4px;
+}
+
+.sfp-ed-style {
+  flex-direction: column;
+  gap: 2px;
+  min-width: 62px;
+  min-height: 56px;
+  padding: 5px 8px;
+  font-size: 11px;
+  color: var(--sfp-text-muted, #57606a);
+}
+
+.sfp-ed-prev {
+  font-size: 15px;
+  line-height: 1.1;
+  color: var(--sfp-text, #1f2328);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.sfp-ed-prev-h1 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--sfp-accent, #0969da);
+}
+
+.sfp-ed-prev-h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--sfp-accent, #0969da);
+}
+
+.sfp-ed-prev-h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--sfp-accent, #0969da);
+}
+
+.sfp-ed-prev-code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Dropdown popups (position:fixed — JS sets left/top after measuring) */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-dd {
+  position: relative;
+  display: inline-flex;
+}
+
+.sfp-ed-pop {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2147483200;
+  background: var(--sfp-bg, #ffffff);
+  color: var(--sfp-text, #1f2328);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 8px;
+  box-shadow: 0 10px 32px var(--sfp-shadow, rgba(0, 0, 0, .35));
+  padding: 8px;
+}
+
+.sfp-ed-pop.sfp-ed-open {
+  display: block;
+}
+
+/* Color swatch grids */
+
+.sfp-ed-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 22px);
+  gap: 5px;
+}
+
+.sfp-ed-swatch {
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(0, 0, 0, .25);
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.sfp-ed-swatch:hover {
+  outline: 2px solid var(--sfp-accent, #0969da);
+  outline-offset: 1px;
+}
+
+.sfp-ed-swatch-none {
+  background:
+    linear-gradient(to top right,
+      transparent 44%, #e03131 46%, #e03131 54%, transparent 56%),
+    #ffffff;
+}
+
+.sfp-ed-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--sfp-border, #d0d7de);
+  font-size: 12px;
+  color: var(--sfp-text-muted, #57606a);
+  cursor: pointer;
+}
+
+.sfp-ed-custom input[type="color"] {
+  width: 34px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Simple menus (line spacing) */
+
+.sfp-ed-menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 90px;
+}
+
+.sfp-ed-menu button {
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--sfp-text, #1f2328);
+  font: inherit;
+  text-align: left;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.sfp-ed-menu button:hover {
+  background: var(--sfp-surface2, #eaeef2);
+}
+
+/* Table grid picker */
+
+.sfp-ed-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 17px);
+  grid-auto-rows: 17px;
+  gap: 3px;
+}
+
+.sfp-ed-cell {
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  background: var(--sfp-surface, #f6f8fa);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.sfp-ed-cell.sfp-ed-sel {
+  background: var(--sfp-highlight, rgba(255, 213, 0, .45)); /* Chrome 110-safe */
+  border-color: var(--sfp-accent, #0969da);
+}
+
+.sfp-ed-gridlabel {
+  margin-top: 7px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--sfp-text-muted, #57606a);
+  user-select: none;
+}
+
+/* Symbols grid */
+
+.sfp-ed-syms {
+  display: grid;
+  grid-template-columns: repeat(6, 30px);
+  gap: 3px;
+}
+
+.sfp-ed-sym {
+  min-width: 30px;
+  min-height: 28px;
+  padding: 2px;
+  font-size: 15px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Editing surface — white Word-like page on every theme               */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-surfwrap {
+  flex: 1 1 auto;
+  overflow: auto;
+  padding: 22px 18px;
+  background: var(--sfp-surface, #f6f8fa);
+}
+
+.sfp-ed-surfwrap::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.sfp-ed-surfwrap::-webkit-scrollbar-thumb {
+  background: var(--sfp-border, #d0d7de);
+  border-radius: 6px;
+  border: 3px solid var(--sfp-surface, #f6f8fa);
+}
+
+.sfp-ed-surfwrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sfp-ed-surface {
+  /* Follows the theme: a light "page" on light themes, dark on dark themes. */
+  background: var(--sfp-bg, #ffffff);
+  color: var(--sfp-text, #111111);
+  max-width: 800px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 34px 40px;
+  border-radius: 4px;
+  box-shadow: 0 3px 16px rgba(0, 0, 0, .28);
+  outline: none;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+  caret-color: var(--sfp-accent, #111111);
+}
+
+/* Placeholder shown while content is empty (class toggled by editor.js) */
+.sfp-ed-surface.sfp-ed-empty::before {
+  content: attr(data-placeholder);
+  color: #9aa0a6;
+  pointer-events: none;
+  display: block;
+  position: absolute; /* keep the caret at the true first line */
+}
+
+.sfp-ed-surface img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sfp-ed-surface table {
+  border-collapse: collapse;
+  max-width: 100%;
+}
+
+.sfp-ed-surface td,
+.sfp-ed-surface th {
+  border: 1px solid #b6b6b6;
+  padding: 6px 8px;
+  vertical-align: top;
+}
+
+.sfp-ed-surface blockquote {
+  border-left: 4px solid #c8ccd2;
+  margin: 8px 0;
+  padding: 4px 14px;
+  color: #555555;
+}
+
+.sfp-ed-surface pre {
+  background: #f4f5f7;
+  border: 1px solid #e2e4e8;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.sfp-ed-surface a {
+  color: #0b57d0;
+}
+
+.sfp-ed-surface hr {
+  border: none;
+  border-top: 2px solid #d0d4da;
+  margin: 14px 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Status bar                                                          */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-status {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 14px;
+  background: var(--sfp-surface, #f6f8fa);
+  border-top: 1px solid var(--sfp-border, #d0d7de);
+  color: var(--sfp-text-muted, #57606a);
+  font-size: 11.5px;
+  user-select: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* Link dialog                                                         */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-dlgback {
+  position: absolute;
+  inset: 0;
+  z-index: 2147483300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, .35);
+}
+
+.sfp-ed-dlg {
+  width: min(420px, 90%);
+  background: var(--sfp-bg, #ffffff);
+  color: var(--sfp-text, #1f2328);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 10px;
+  box-shadow: 0 16px 48px var(--sfp-shadow, rgba(0, 0, 0, .4));
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sfp-ed-dlgtitle {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sfp-ed-dlg label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--sfp-text-muted, #57606a);
+}
+
+.sfp-ed-dlg input[type="text"] {
+  background: var(--sfp-surface, #f6f8fa);
+  color: var(--sfp-text, #1f2328);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 9px;
+}
+
+.sfp-ed-dlg input[type="text"]:focus {
+  outline: 2px solid var(--sfp-accent, #0969da);
+  outline-offset: -1px;
+}
+
+.sfp-ed-dlgbtns {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.sfp-ed-dlgbtns .sfp-ed-btn {
+  border-color: var(--sfp-border, #d0d7de);
+  padding: 6px 14px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Toast                                                               */
+/* ------------------------------------------------------------------ */
+
+.sfp-ed-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483400;
+  background: var(--sfp-surface, #f6f8fa);
+  color: var(--sfp-text, #1f2328);
+  border: 1px solid var(--sfp-border, #d0d7de);
+  border-left: 4px solid var(--sfp-accent, #0969da);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px var(--sfp-shadow, rgba(0, 0, 0, .35));
+  padding: 10px 16px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 13px;
+  opacity: 1;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.sfp-ed-toast-out {
+  opacity: 0;
+  transform: translateY(8px);
+}

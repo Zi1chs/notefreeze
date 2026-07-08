@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NoteFreeze</title>
+  <link rel="stylesheet" href="../shared/themes.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="sfp-header">
+    <img class="sfp-logo" src="../icons/icon32.png" alt="" width="20" height="20">
+    <h1 class="sfp-title">NoteFreeze</h1>
+  </header>
+
+  <main class="sfp-main">
+    <section class="sfp-capture-section">
+      <button id="sfp-capture-btn" class="sfp-btn-primary" type="button">
+        📸 Capture &amp; Annotate this page
+      </button>
+      <label class="sfp-compact" title="Much smaller files: skips embedding web fonts (text uses system fonts) and recompresses images to WebP. A 65 MB page becomes ~2 MB. Uncheck for a pixel-perfect capture with original fonts and images.">
+        <input type="checkbox" id="sfp-compact" checked>
+        <span>Compact — smaller files (skip fonts, optimize images)</span>
+      </label>
+      <p id="sfp-status" class="sfp-status" role="status" hidden></p>
+      <p class="sfp-hint">or press <kbd id="sfp-shortcut">Ctrl+Shift+Y</kbd></p>
+    </section>
+
+    <section class="sfp-section">
+      <h2 class="sfp-section-title">Theme</h2>
+      <div id="sfp-theme-picker" class="sfp-theme-picker"></div>
+    </section>
+
+    <section class="sfp-section">
+      <h2 class="sfp-section-title">Recent captures</h2>
+      <ul id="sfp-captures" class="sfp-captures"></ul>
+      <p id="sfp-captures-empty" class="sfp-empty" hidden>No captures yet.</p>
+    </section>
+  </main>
+
+  <footer class="sfp-footer">100% local — your data never leaves this device.</footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>

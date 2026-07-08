@@ -1,0 +1,323 @@
+/* NoteFreeze — popup styles (SPEC §7). Theme-reactive via --sfp-* variables only. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 360px;
+  background: var(--sfp-bg);
+  color: var(--sfp-text);
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Header ---------- */
+
+.sfp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--sfp-surface);
+  border-bottom: 1px solid var(--sfp-border);
+}
+
+.sfp-logo {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  flex: none;
+}
+
+.sfp-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- Capture ---------- */
+
+.sfp-capture-section {
+  padding: 14px 14px 2px;
+}
+
+.sfp-btn-primary {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: var(--sfp-accent);
+  color: var(--sfp-accent-text);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 4px var(--sfp-shadow);
+  transition: filter 0.12s ease, transform 0.06s ease;
+}
+
+.sfp-btn-primary:hover:not(:disabled) { filter: brightness(1.08); }
+.sfp-btn-primary:active:not(:disabled) { transform: translateY(1px); }
+.sfp-btn-primary:disabled { opacity: 0.6; cursor: default; }
+
+.sfp-compact {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 9px;
+  font-size: 12px;
+  color: var(--sfp-text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+.sfp-compact input { accent-color: var(--sfp-accent); cursor: pointer; margin: 0; }
+
+.sfp-btn-primary:focus-visible,
+.sfp-swatch:focus-visible,
+.sfp-btn-open:focus-visible,
+.sfp-btn-del:focus-visible {
+  outline: 2px solid var(--sfp-accent);
+  outline-offset: 2px;
+}
+
+.sfp-status {
+  margin: 8px 0 0;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  background: var(--sfp-surface);
+  border: 1px solid var(--sfp-border);
+  overflow-wrap: break-word;
+}
+
+.sfp-status.error {
+  color: var(--sfp-danger);
+  border-color: var(--sfp-danger);
+}
+
+.sfp-hint {
+  margin: 8px 0 4px;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--sfp-text-muted);
+}
+
+kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--sfp-border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--sfp-surface2);
+  color: var(--sfp-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 10.5px;
+}
+
+/* ---------- Sections ---------- */
+
+.sfp-section {
+  padding: 10px 14px 6px;
+  border-top: 1px solid var(--sfp-border);
+  margin-top: 8px;
+}
+
+.sfp-section-title {
+  margin: 0 0 7px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--sfp-text-muted);
+}
+
+/* ---------- Theme picker ---------- */
+
+.sfp-theme-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 7px 0;
+}
+
+.sfp-theme-row-label {
+  flex: none;
+  width: 50px;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--sfp-text-muted);
+}
+
+.sfp-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.sfp-swatch {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--sfp-border);
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, box-shadow 0.12s ease;
+}
+
+.sfp-swatch:hover { transform: scale(1.15); }
+
+.sfp-swatch.active {
+  box-shadow: 0 0 0 2px var(--sfp-bg), 0 0 0 4px var(--sfp-accent);
+}
+
+.sfp-swatch-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ---------- Recent captures ---------- */
+
+.sfp-captures {
+  list-style: none;
+  margin: 0 -6px;
+  padding: 0;
+  max-height: 244px;
+  overflow-y: auto;
+}
+
+.sfp-capture-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: 8px;
+}
+
+.sfp-capture-row:hover { background: var(--sfp-surface); }
+
+.sfp-capture-info {
+  flex: 1;
+  min-width: 0; /* enables ellipsis inside flex */
+}
+
+.sfp-capture-title {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sfp-capture-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--sfp-text-muted);
+}
+
+.sfp-badge {
+  padding: 0 6px;
+  border: 1px solid var(--sfp-border);
+  border-radius: 10px;
+  background: var(--sfp-surface2);
+  color: var(--sfp-text-muted);
+  font-size: 10.5px;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
+.sfp-badge.has-annotations {
+  background: var(--sfp-highlight);
+  border-color: transparent;
+  color: var(--sfp-text);
+  font-weight: 600;
+}
+
+.sfp-btn-open {
+  flex: none;
+  padding: 3px 9px;
+  border: 1px solid var(--sfp-accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sfp-accent);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.sfp-btn-open:hover {
+  background: var(--sfp-accent);
+  color: var(--sfp-accent-text);
+}
+
+.sfp-btn-del {
+  flex: none;
+  padding: 3px 5px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: background-color 0.12s ease, opacity 0.12s ease;
+}
+
+.sfp-btn-del:hover {
+  background: var(--sfp-surface2);
+  opacity: 1;
+}
+
+.sfp-empty {
+  margin: 2px 0 6px;
+  font-size: 12px;
+  color: var(--sfp-text-muted);
+}
+
+.sfp-more {
+  margin: 4px 8px 2px;
+  font-size: 11px;
+  color: var(--sfp-text-muted);
+}
+
+/* ---------- Footer ---------- */
+
+.sfp-footer {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: var(--sfp-surface);
+  border-top: 1px solid var(--sfp-border);
+  color: var(--sfp-text-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+/* ---------- Scrollbar (captures list) ---------- */
+
+.sfp-captures::-webkit-scrollbar { width: 8px; }
+.sfp-captures::-webkit-scrollbar-track { background: transparent; }
+
+.sfp-captures::-webkit-scrollbar-thumb {
+  background: var(--sfp-border);
+  border-radius: 4px;
+}
+
+.sfp-captures::-webkit-scrollbar-thumb:hover { background: var(--sfp-text-muted); }

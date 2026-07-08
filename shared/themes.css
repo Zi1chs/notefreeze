@@ -1,0 +1,193 @@
+/* NoteFreeze — shared themes (SPEC §8)
+ *
+ * 11 themes exposed as CSS custom properties. The default (:root) is github-light;
+ * every theme is also addressable via [data-theme="<id>"] on the root element.
+ *
+ * Variables (exact contract names — use these everywhere):
+ *   --sfp-bg          page background
+ *   --sfp-surface     cards / toolbars / list hover
+ *   --sfp-surface2    second-level surface (badges, kbd, pressed states)
+ *   --sfp-text        primary text
+ *   --sfp-text-muted  secondary text
+ *   --sfp-border      hairline borders
+ *   --sfp-accent      brand / primary action color
+ *   --sfp-accent-text readable text on top of --sfp-accent
+ *   --sfp-danger      destructive actions / errors
+ *   --sfp-highlight   translucent text-highlight tint (yellow on light, amber on dark)
+ *   --sfp-shadow      drop-shadow color (rgba)
+ *
+ * `color-scheme` is set per theme so native widgets (selects, scrollbars,
+ * checkboxes) render correctly in dark themes.
+ */
+
+/* ---------- Light themes ---------- */
+
+:root,
+[data-theme="github-light"] {
+  --sfp-bg: #ffffff;
+  --sfp-surface: #f6f8fa;
+  --sfp-surface2: #eaeef2;
+  --sfp-text: #1f2328;
+  --sfp-text-muted: #656d76;
+  --sfp-border: #d0d7de;
+  --sfp-accent: #0969da;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #cf222e;
+  --sfp-highlight: rgba(255, 213, 0, 0.38);
+  --sfp-shadow: rgba(31, 35, 40, 0.15);
+  color-scheme: light;
+}
+
+[data-theme="solarized-light"] {
+  --sfp-bg: #fdf6e3;
+  --sfp-surface: #eee8d5;
+  --sfp-surface2: #e4dcc3;
+  --sfp-text: #586e75;
+  --sfp-text-muted: #839496;
+  --sfp-border: #d9cfb2;
+  --sfp-accent: #268bd2;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #dc322f;
+  --sfp-highlight: rgba(181, 137, 0, 0.28);
+  --sfp-shadow: rgba(101, 123, 131, 0.2);
+  color-scheme: light;
+}
+
+[data-theme="one-light"] {
+  --sfp-bg: #fafafa;
+  --sfp-surface: #f0f0f1;
+  --sfp-surface2: #e5e5e6;
+  --sfp-text: #383a42;
+  --sfp-text-muted: #696c77;
+  --sfp-border: #d4d4d5;
+  --sfp-accent: #4078f2;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #e45649;
+  --sfp-highlight: rgba(255, 210, 60, 0.38);
+  --sfp-shadow: rgba(56, 58, 66, 0.14);
+  color-scheme: light;
+}
+
+[data-theme="gruvbox-light"] {
+  --sfp-bg: #fbf1c7;
+  --sfp-surface: #ebdbb2;
+  --sfp-surface2: #d5c4a1;
+  --sfp-text: #3c3836;
+  --sfp-text-muted: #7c6f64;
+  --sfp-border: #bdae93;
+  --sfp-accent: #076678;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #cc241d;
+  --sfp-highlight: rgba(215, 153, 33, 0.32);
+  --sfp-shadow: rgba(60, 56, 54, 0.18);
+  color-scheme: light;
+}
+
+[data-theme="catppuccin-latte"] {
+  --sfp-bg: #eff1f5;
+  --sfp-surface: #e6e9ef;
+  --sfp-surface2: #dce0e8;
+  --sfp-text: #4c4f69;
+  --sfp-text-muted: #6c6f85;
+  --sfp-border: #ccd0da;
+  --sfp-accent: #8839ef;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #d20f39;
+  --sfp-highlight: rgba(223, 142, 29, 0.25);
+  --sfp-shadow: rgba(76, 79, 105, 0.16);
+  color-scheme: light;
+}
+
+/* ---------- Dark themes ---------- */
+
+[data-theme="dracula"] {
+  --sfp-bg: #282a36;
+  --sfp-surface: #44475a;
+  --sfp-surface2: #4d5066;
+  --sfp-text: #f8f8f2;
+  --sfp-text-muted: #9ba3c7;
+  --sfp-border: #5f6480;
+  --sfp-accent: #bd93f9;
+  --sfp-accent-text: #21222c; /* pale accent → dark text for contrast */
+  --sfp-danger: #ff5555;
+  --sfp-highlight: rgba(255, 184, 108, 0.32);
+  --sfp-shadow: rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+[data-theme="nord"] {
+  --sfp-bg: #2e3440;
+  --sfp-surface: #3b4252;
+  --sfp-surface2: #434c5e;
+  --sfp-text: #eceff4;
+  --sfp-text-muted: #a1aabf;
+  --sfp-border: #4c566a;
+  --sfp-accent: #88c0d0;
+  --sfp-accent-text: #2e3440; /* pale accent → dark text for contrast */
+  --sfp-danger: #bf616a;
+  --sfp-highlight: rgba(235, 203, 139, 0.3);
+  --sfp-shadow: rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+[data-theme="solarized-dark"] {
+  --sfp-bg: #002b36;
+  --sfp-surface: #073642;
+  --sfp-surface2: #0d4351;
+  --sfp-text: #93a1a1;
+  --sfp-text-muted: #657b83;
+  --sfp-border: #145a6a;
+  --sfp-accent: #268bd2;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #dc322f;
+  --sfp-highlight: rgba(181, 137, 0, 0.35);
+  --sfp-shadow: rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+[data-theme="tokyo-night"] {
+  --sfp-bg: #1a1b26;
+  --sfp-surface: #24283b;
+  --sfp-surface2: #292e42;
+  --sfp-text: #c0caf5;
+  --sfp-text-muted: #7a83ad;
+  --sfp-border: #3b4261;
+  --sfp-accent: #7aa2f7;
+  --sfp-accent-text: #16161e; /* pale accent → dark text for contrast */
+  --sfp-danger: #f7768e;
+  --sfp-highlight: rgba(224, 175, 104, 0.3);
+  --sfp-shadow: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+[data-theme="one-dark"] {
+  --sfp-bg: #282c34;
+  --sfp-surface: #21252b;
+  --sfp-surface2: #2c313a;
+  --sfp-text: #abb2bf;
+  --sfp-text-muted: #7f848e;
+  --sfp-border: #3e4451;
+  --sfp-accent: #61afef;
+  --sfp-accent-text: #1a1e26; /* pale accent → dark text for contrast */
+  --sfp-danger: #e06c75;
+  --sfp-highlight: rgba(229, 192, 123, 0.28);
+  --sfp-shadow: rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+/* ---------- Special ---------- */
+
+[data-theme="blackpink"] {
+  --sfp-bg: #0a0a0a;
+  --sfp-surface: #16161a;
+  --sfp-surface2: #221f26;
+  --sfp-text: #f5e6ee;
+  --sfp-text-muted: #b193a3;
+  --sfp-border: #38222e;
+  --sfp-accent: #ff2e88;
+  --sfp-accent-text: #ffffff;
+  --sfp-danger: #ff4d4d;
+  --sfp-highlight: rgba(255, 179, 90, 0.3);
+  --sfp-shadow: rgba(255, 46, 136, 0.22); /* signature pink glow */
+  color-scheme: dark;
+}

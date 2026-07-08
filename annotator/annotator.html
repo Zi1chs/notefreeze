@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NoteFreeze — Annotator</title>
+  <link rel="stylesheet" href="../shared/themes.css">
+  <link rel="stylesheet" href="annotator.css">
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+  <header id="sfp-toolbar">
+    <div class="sfp-brand">
+      <img class="sfp-brand-icon" src="../icons/icon32.png" alt="">
+      <span class="sfp-brand-name">NoteFreeze</span>
+    </div>
+
+    <div class="sfp-meta">
+      <div class="sfp-meta-title" id="sfp-title">Loading capture…</div>
+      <div class="sfp-meta-sub">
+        <a id="sfp-url" target="_blank" rel="noopener noreferrer"></a>
+        <span id="sfp-date"></span>
+      </div>
+    </div>
+
+    <span id="sfp-count" class="sfp-count-badge" title="0 annotations" aria-label="Annotation count">0</span>
+
+    <label class="sfp-field">
+      <span class="sfp-field-label">Theme</span>
+      <select id="sfp-theme-select" aria-label="Theme">
+        <optgroup label="Light">
+          <option value="github-light">GitHub Light</option>
+          <option value="solarized-light">Solarized Light</option>
+          <option value="one-light">One Light</option>
+          <option value="gruvbox-light">Gruvbox Light</option>
+          <option value="catppuccin-latte">Catppuccin Latte</option>
+        </optgroup>
+        <optgroup label="Dark">
+          <option value="dracula">Dracula</option>
+          <option value="nord">Nord</option>
+          <option value="solarized-dark">Solarized Dark</option>
+          <option value="tokyo-night">Tokyo Night</option>
+          <option value="one-dark">One Dark</option>
+        </optgroup>
+        <optgroup label="Special">
+          <option value="blackpink">Neon Noir</option>
+        </optgroup>
+      </select>
+    </label>
+
+    <label class="sfp-check">
+      <input type="checkbox" id="sfp-autodownload" checked>
+      <span>Auto-download on save</span>
+    </label>
+
+    <button id="sfp-save" class="sfp-btn sfp-btn-primary" type="button">💾 Save HTML</button>
+    <button id="sfp-clear" class="sfp-btn sfp-btn-secondary" type="button">🗑 Clear all annotations</button>
+  </header>
+
+  <main id="sfp-main">
+    <iframe id="sfp-frame" title="Captured page"></iframe>
+    <div id="sfp-error" hidden>
+      <div class="sfp-error-card">
+        <div class="sfp-error-emoji">📄</div>
+        <h1>Capture not found</h1>
+        <p id="sfp-error-msg"></p>
+        <p class="sfp-error-hint">Open the NoteFreeze popup and pick a capture from “Recent captures”, or capture a page again.</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="sfp-toast" role="status" hidden></div>
+
+  <script src="exporter.js"></script>
+  <script src="editor.js"></script>
+  <script src="annotator.js"></script>
+</body>
+</html>

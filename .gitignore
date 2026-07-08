@@ -1,0 +1,21 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / temp
+*.log
+*.tmp
+
+# Not used (this is a zero-dependency, no-build extension) — future-proofing
+node_modules/
+dist/
+
+# Local captures / exports you might drop in while testing
+*.annotated.html

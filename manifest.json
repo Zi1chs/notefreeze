@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "NoteFreeze",
+  "version": "1.0.0",
+  "description": "Capture the current page as a single fully-offline HTML file and annotate it with rich text.",
+  "minimum_chrome_version": "110",
+  "permissions": ["activeTab", "scripting", "storage", "unlimitedStorage", "downloads", "notifications", "clipboardRead"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "NoteFreeze — Capture & Annotate (Ctrl+Shift+Y)",
+    "default_icon": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+  },
+  "commands": {
+    "capture-annotate": {
+      "suggested_key": { "default": "Ctrl+Shift+Y", "mac": "MacCtrl+Shift+Y" },
+      "description": "Capture current page and start annotating"
+    }
+  },
+  "icons": { "16": "icons/icon16.png", "32": "icons/icon32.png", "48": "icons/icon48.png", "128": "icons/icon128.png" }
+}
